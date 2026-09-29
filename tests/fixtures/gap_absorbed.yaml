@@ -1,0 +1,28 @@
+project:
+  id: gap-absorbed
+  title: {fr: "Essai", en: "Test"}
+  address: "1 rue Test"
+  author: "Test"
+  date: "2026-09-28"
+ledger:
+  env_w: {v: 204.5, src: tape}
+  env_d: {v: 100, src: tape}
+  ext_t: {v: 6.5, src: tape}
+  p_std: {v: 4.5, src: tape}
+  a_w:   {v: 100, src: tape}
+  b_w:   {v: 98, src: tape}
+  d_w:   {v: 30, src: tape}
+levels:
+  - id: main
+    name: {fr: "Étage", en: "Floor"}
+    exterior_wall: ext_t
+    partition: p_std
+    gap_q: Q1
+    envelope: {origin: [0, 0], path: [[E, env_w], [N, env_d], [W, env_w], [S, env_d]]}
+    rooms:
+      - {id: A, name: {fr: Pièce A, en: Room A}, origin: [0, 0], path: [[E, a_w], [N, env_d], [W, a_w], [S, env_d]], dims: [a_w, env_d]}
+      - {id: B, name: {fr: Pièce B, en: Room B}, origin: ["=a_w + 6.5", 0], path: [[E, b_w], [N, env_d], [W, b_w], [S, env_d]], dims: [b_w, env_d]}
+    openings:
+      - {id: D1, type: door, room: A, edge: 1, offset: 20, width: d_w}
+questions:
+  - {id: Q1, rank: 1, title: "Measure the wall between A and B", measure: "Tape the gap between the two rooms", why: "Confirms the wall thickness"}

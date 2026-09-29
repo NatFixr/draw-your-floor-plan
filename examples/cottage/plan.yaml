@@ -1,0 +1,109 @@
+project:
+  id: example
+  title: {fr: "Chalet exemple", en: "Example cottage"}
+  address: "123 Lake Road"
+  author: "Your Name"
+  date: "2026-09-28"
+  sheet_prefix: A
+  subtitle: {fr: "Plan de l'existant", en: "Existing plan"}
+  notes:
+    fr:
+      - "Dimensions intérieures, prises au ruban."
+      - "Vérifier toutes les dimensions sur place avant les travaux."
+    en:
+      - "Interior dimensions, taken by tape."
+      - "Verify all dimensions on site before work."
+ledger:
+  env_w:   {v: 300,   src: tape, date: "2026-09-20", note: "interior width"}
+  env_d:   {v: 240,   src: tape, date: "2026-09-20", note: "interior depth"}
+  ext_t:   {v: 6.5,   src: tape, date: "2026-09-20", note: "exterior wall"}
+  p_std:   {v: 4.5,   src: tape, date: "2026-09-20", note: "partition"}
+  hsp:     {v: 96,    src: tape, date: "2026-09-20", note: "ceiling height"}
+  liv_d:   {v: 110,   src: tape, date: "2026-09-20", note: "living room depth"}
+  north_d: {v: 125.5, src: tape, date: "2026-09-20", note: "bedroom and bathroom depth"}
+  bed_w:   {v: 180,   src: tape, date: "2026-09-20", note: "bedroom width"}
+  bath_w:  {v: 115.5, src: tape, date: "2026-09-20", note: "bathroom width"}
+  d1_w:    {v: 36,    src: tape, date: "2026-09-20", note: "entry door"}
+  d2_w:    {v: 32,    src: tape, date: "2026-09-20", note: "bedroom door"}
+  d3_w:    {v: 30,    src: tape, date: "2026-09-20", note: "bathroom door"}
+  o1_w:    {v: 30,    src: tape, date: "2026-09-20", note: "ensuite door"}
+  d_h:     {v: 80,    src: tape, date: "2026-09-20", note: "door height"}
+  w1_w:    {v: 48,    src: tape, date: "2026-09-20"}
+  w1_h:    {v: 48,    src: tape, date: "2026-09-20"}
+  w2_w:    {v: 36,    src: tape, date: "2026-09-20"}
+  w2_h:    {v: 48,    src: tape, date: "2026-09-20"}
+  w3_w:    {v: 48,    src: tape, date: "2026-09-20"}
+  w3_h:    {v: 48,    src: tape, date: "2026-09-20"}
+  w4_w:    {v: 30,    src: tape, date: "2026-09-20"}
+  w4_h:    {v: 36,    src: tape, date: "2026-09-20"}
+  w1_s:    {v: 30,    src: tape, date: "2026-09-20", note: "W1 sill above floor"}
+  w2_s:    {v: 30,    src: tape, date: "2026-09-20"}
+  w3_s:    {v: 30,    src: tape, date: "2026-09-20"}
+  w4_s:    {v: 48,    src: tape, date: "2026-09-20"}
+  sofa_w:  {v: 84,    src: tape, date: "2026-09-20", note: "sofa"}
+  sofa_d:  {v: 36,    src: tape, date: "2026-09-20"}
+  sofa_h:  {v: 32,    src: tape, date: "2026-09-20"}
+  ctab_w:  {v: 48,    src: tape, date: "2026-09-20", note: "coffee table"}
+  ctab_d:  {v: 24,    src: tape, date: "2026-09-20"}
+  qbed_w:  {v: 60,    src: tape, date: "2026-09-20", note: "queen bed"}
+  qbed_d:  {v: 80,    src: tape, date: "2026-09-20"}
+  qbed_h:  {v: 24,    src: tape, date: "2026-09-20"}
+  wc_w:    {v: 20,    src: tape, date: "2026-09-20", note: "toilet"}
+  wc_d:    {v: 28,    src: tape, date: "2026-09-20"}
+  van_w:   {v: 30,    src: tape, date: "2026-09-20", note: "vanity"}
+  van_d:   {v: 21,    src: tape, date: "2026-09-20"}
+  tub_w:   {v: 60,    src: tape, date: "2026-09-20", note: "tub"}
+  tub_d:   {v: 32,    src: tape, date: "2026-09-20"}
+levels:
+  - id: main
+    name: {fr: "Rez-de-chaussée", en: "Main floor"}
+    ceiling: hsp
+    exterior_wall: ext_t
+    partition: p_std
+    envelope:
+      origin: [0, 0]
+      path: [[E, env_w], [N, env_d], [W, env_w], [S, env_d]]
+    rooms:
+      - id: R1
+        name: {fr: Séjour, en: Living room}
+        kind: room
+        status: existing
+        origin: [0, 0]
+        path: [[E, env_w], [N, liv_d], [W, env_w], [S, liv_d]]
+        dims: [env_w, liv_d]
+      - id: R2
+        name: {fr: Chambre, en: Bedroom}
+        kind: room
+        status: existing
+        origin: [0, "=liv_d + p_std"]
+        path: [[E, bed_w], [N, north_d], [W, bed_w], [S, north_d]]
+        dims: [bed_w, north_d]
+      - id: R3
+        name: {fr: Salle de bain, en: Bathroom}
+        kind: bath
+        status: existing
+        origin: ["=bed_w + p_std", "=liv_d + p_std"]
+        path: [[E, bath_w], [N, north_d], [W, bath_w], [S, north_d]]
+        dims: [bath_w, north_d]
+    openings:
+      - {id: D1, type: door, room: R1, edge: 0, offset: 40, width: d1_w, height: d_h, hinge: start, swing: in, status: existing, position: measured}
+      - {id: D2, type: door, room: R2, edge: 0, offset: 20, width: d2_w, height: d_h, hinge: start, swing: in, status: existing, position: measured}
+      - {id: D3, type: door, room: R3, edge: 0, offset: 15, width: d3_w, height: d_h, hinge: end, swing: in, status: existing, position: measured}
+      - {id: O1, type: door, room: R2, edge: 1, offset: 30, width: o1_w, height: d_h, hinge: start, swing: in, status: existing, position: measured}
+      - {id: W1, type: window, room: R1, edge: 0, offset: 150, width: w1_w, height: w1_h, sill: w1_s, status: existing, position: measured}
+      - {id: W2, type: window, room: R1, edge: 1, offset: 30, width: w2_w, height: w2_h, sill: w2_s, status: existing, position: measured}
+      - {id: W3, type: window, room: R2, edge: 3, offset: 30, width: w3_w, height: w3_h, sill: w3_s, status: existing, position: measured}
+      - {id: W4, type: window, room: R3, edge: 2, offset: 40, width: w4_w, height: w4_h, sill: w4_s, status: existing, position: measured}
+    fixtures:  # at = centre (model in); rot = compass bearing of the fixture's back: 0 N, 90 E, 180 S, 270 W
+      - {type: toilet, room: R3, at: [215, 226], rot: 0, w: wc_w, d: wc_d}
+      - {type: sink, room: R3, at: [250, 229.5], rot: 0, w: van_w, d: van_d}
+      - {type: tub, room: R3, at: [284, 210], rot: 90, w: tub_w, d: tub_d}
+    furniture:  # at = centre; rot = compass bearing of the item's back, as for fixtures
+      - {id: F1, type: sofa, room: R1, at: [150, 92], rot: 0, w: sofa_w, d: sofa_d, h: sofa_h}
+      - {id: F2, type: table, room: R1, at: [150, 50], rot: 0, w: ctab_w, d: ctab_d, label: {fr: "TABLE BASSE", en: "COFFEE TABLE"}}
+      - {id: F3, type: bed, room: R2, at: [100, 200], rot: 0, w: qbed_w, d: qbed_d, h: qbed_h}
+chains:
+  - {id: C1, level: main, parts: [bed_w, p_std, bath_w], total: env_w, note: "north band, west to east"}
+  - {id: C2, level: main, parts: [liv_d, p_std, north_d], total: env_d, note: "west column, south to north"}
+  - {id: C3, level: main, parts: [liv_d, p_std, north_d], total: env_d, note: "east column, south to north"}
+questions: []

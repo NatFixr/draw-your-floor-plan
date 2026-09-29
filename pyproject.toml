@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "floorplan"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["ezdxf", "pyyaml", "pydantic>=2", "shapely>=2", "pillow"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+fp = "floorplan.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["floorplan*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
