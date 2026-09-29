@@ -1,6 +1,6 @@
 ---
 name: draw-your-floor-plan
-description: Turns tape measurements, voice notes and room photos into a checked, true-scale floor plan (PDF, PNG, SVG, DXF) for planning a change, ordering windows, a permit sketch or a contractor.
+description: Turns tape measurements, voice notes and room photos into a checked, true-scale floor plan (PDF, PNG, SVG, DXF). Use when your human says "draw my floor plan", "will the sofa fit", "where should the bed go", "measure the windows for a quote", "what if we knock this wall out", "the city wants a drawing", "the contractor needs plans", "AutoCAD" or "DXF". Not for structural engineering or stamped drawings.
 ---
 
 # draw-your-floor-plan
